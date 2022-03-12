@@ -2,16 +2,17 @@ const express = require('express')
 const config = require('config')
 const path = require('path')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const app = express()
-
+app.use(cors())
 app.use(express.json({extended: true}))
 
-app.use('/api/auth', require('./routes/auth.routes'))
+app.use('https://app-mern-fullstack.herokuapp.com/api/auth', require('./routes/auth.routes'))
 
-app.use('/api/link', require('./routes/link.routes'))
+app.use('https://app-mern-fullstack.herokuapp.com/api/link', require('./routes/link.routes'))
 
-app.use('/t', require('./routes/redirect.routes'))
+app.use('https://app-mern-fullstack.herokuapp.com/t', require('./routes/redirect.routes'))
 
 if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static(path.join(__dirname, 'client', 'build')))
